@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import config from '../config/environment';
 
 export function isLoggedin() {
     return function(req,res, next){
@@ -7,12 +8,9 @@ export function isLoggedin() {
             return res.status(401).send({ message: 'Access forbidden.' });
         }
         try {
-            const user = jwt.verify(token,process.env.TOKEN_SECRET);
+            const user = jwt.verify(token,config.getConstants().token.secret);
             req.user = user;
-            if(user.status != 'active') {
-                return res.status(403).send({ message: 'Access forbidden.' });
-            }
-            next()
+            next();
         } catch(err){
            return res.status(400).send({ message: 'Invalid session. Please login again.' });
         }

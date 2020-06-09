@@ -13,8 +13,14 @@ var MenuSchema = new mongoose.Schema({
         type: String
     },
     'price': {
-        type: Number,
-        required: true
+        'dollar': {
+            type: Number,
+            required: true
+        },
+        'euro': {
+            type: Number,
+            required: true
+        }
     }
 }, {
     timestamps: {

@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
 var OrderSchema = new mongoose.Schema({
     'order_no': {
@@ -15,10 +15,16 @@ var OrderSchema = new mongoose.Schema({
     },
     'items': [{
         'item': {
-            type: String
+            type: Schema.ObjectId,
+            ref: 'Menu'
         },
         'price': {
-            type: Number
+            'currency': {
+                type: String
+            },
+            'value': {
+                type: Number
+            }
         }
     }],
     'sub_total': {
