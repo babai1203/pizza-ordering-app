@@ -1,1 +1,50 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --black: #0A0907;
+    --off-white: #FAFAFA;
+    --dark-yellow: #F2AD37;
+    --light-yellow: #F7B248;
+    --light-grey: #AAA5A1;
+    --dark-grey: #7C7C84;
+    --red: #C94617;
+    --brown: #625045;
+    --white: #FFFFFF;
+}
+* {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    outline: 0;
+    margin: 0;
+    padding: 0;
+    letter-spacing: 0.5px;
+    line-height: 1.5;
+}
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0,0,0,.6);
+}
+::-moz-scrollbar {
+    width: 5px;
+}
+::-moz-scrollbar-thumb {
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0,0,0,.6);
+}
+a, button {
+    cursor: pointer;
+}
+a {
+    text-decoration: none;
+}
+button {
+    background: var(--red);
+    color: var(--white);
+    border: 0;
+    padding: 20px 40px;
+    border-radius: 50px;
+    letter-spacing: 2px;
+}

@@ -1,0 +1,33 @@
+.banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 1;
+    img {
+        width: 100%;
+    }
+    .cta {
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 0;
+        text-align: right;
+        padding: 50px;
+        img {
+            width: 75px;
+            position: fixed;
+            top: 0;
+            right: 50px;
+            z-index: 2;
+        }
+        h3 {
+            margin: 150px 0;
+            letter-spacing: 1.5px;
+            line-height: 2;
+            font-size: 18px;
+        }
+    }
+}
