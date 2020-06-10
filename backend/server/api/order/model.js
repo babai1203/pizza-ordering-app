@@ -18,6 +18,9 @@ var OrderSchema = new mongoose.Schema({
             type: Schema.ObjectId,
             ref: 'Menu'
         },
+        'quantity': {
+            type: Number
+        },
         'price': {
             'currency': {
                 type: String
