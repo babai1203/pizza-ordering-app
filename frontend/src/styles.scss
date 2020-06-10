@@ -1,9 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 :root {
-    --black: #0A0907;
+    --black: #444444;
     --off-white: #FAFAFA;
-    --dark-yellow: #F2AD37;
-    --light-yellow: #F7B248;
+    --dark-yellow: #C9AD64;
+    --light-yellow: #FFE08D;
+    --background-yellow: #FFEAB1;
     --light-grey: #AAA5A1;
     --dark-grey: #7C7C84;
     --red: #C94617;
@@ -19,6 +20,9 @@
     padding: 0;
     letter-spacing: 0.5px;
     line-height: 1.5;
+}
+body {
+    background: var(--white);
 }
 ::-webkit-scrollbar {
     width: 5px;

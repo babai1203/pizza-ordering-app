@@ -1,1 +1,42 @@
-<p>home works!</p>
+<div class="yellow_bar"></div>
+<div class="yellow_circle"></div>
+<img src="assets/sc.png" class="logo">
+<div class="menu">
+    <h3>CATEGORIES</h3>
+    <ol>
+        <li *ngFor="let item of menu; let i = index;" (mouseenter)="highlight(i)" (mouseleave)="remove_highlight()" (click)="select_tab(i)" [ngClass]="{'active':hover_tab == i}">
+            <div *ngIf="hover_tab == i"></div>
+            {{item}}
+            <div *ngIf="hover_tab == i"></div>
+        </li>
+    </ol>
+</div>
+<div class="display_bar">
+    <div style="display: contents;text-align: right;">
+        <img class="cart" src="assets/food.png">
+        <span class="content">ORDER STATUS</span>
+        <div class="number">
+            <span>{{order.items.length}}</span>
+        </div>
+    </div>
+    <h1>
+        {{menu[active_tab]}}
+    </h1>
+    <div class="wid_100">
+        <div class="wid_33" *ngFor="let item of filtered_items; let i = index;">
+            <img *ngIf="menu[active_tab] == 'Pizza'" src="assets/pizza.png">
+            <img *ngIf="menu[active_tab] == 'Dessert'" src="assets/desserts.png">
+            <h3>
+                <span *ngIf="currency == 'dollar'">$</span>
+                <span *ngIf="currency == 'euro'">€</span>
+                {{item.price[currency]}} {{item.price.value}}
+            </h3>
+            <h2>
+                {{item.title}}
+            </h2>
+            <p>
+                {{item.description}}
+            </p>
+        </div>
+    </div>
+</div>
