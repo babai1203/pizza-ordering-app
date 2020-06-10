@@ -21,7 +21,7 @@ export class GlobalService {
   ) {
     this.menu = {};
     this.url = environment.url;
-    this.cart = {"type":"cart","user":"","items":[],"sub_total":0,"discount":0,"delivery_charge":0,"total_amount":0,"address":""};
+    this.cart = window.sessionStorage.cart ? JSON.parse(window.sessionStorage.cart) : {"type":"cart","user":"","items":[],"sub_total":0,"discount":0,"delivery_charge":0,"total_amount":0,"address":""};
     this.order = {};
     this.order_no = window.sessionStorage.order_no ? window.sessionStorage.order_no : '';
     this.currency_sub = new BehaviorSubject<any>('euro');
@@ -60,6 +60,8 @@ export class GlobalService {
         console.log(err);
         alert('Technical Error. Please try again.');
       });
+    } else {
+      this.set_cart(this.cart);
     }
   }
   get_currency(): Observable<string> {
@@ -73,5 +75,6 @@ export class GlobalService {
   }
   set_cart(obj): void {
     this.cart_sub.next(obj);
+    window.sessionStorage.cart = JSON.stringify(obj);
   }
 }

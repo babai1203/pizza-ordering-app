@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { GlobalService } from '../global.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-order',
@@ -6,10 +9,32 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./order.component.scss']
 })
 export class OrderComponent implements OnInit {
-
-  constructor() { }
+  currency: string;
+  order: any;
+  constructor(
+    private router: Router,
+    private global: GlobalService,
+    private location: Location
+  ) {
+    this.order = global.get_order();
+    console.log(this.order);
+  }
 
   ngOnInit(): void {
+    this.global.get_currency().subscribe((str)=>{
+      this.currency = str;
+    });
+    this.global.get_cart().subscribe((obj)=>{
+      this.order = obj;
+    });
+  }
+
+  back() {
+    this.location.back();
+  }
+
+  stop(event) {
+    event.stopPropagation();
   }
 
 }

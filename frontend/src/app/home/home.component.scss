@@ -1,6 +1,6 @@
 .yellow_bar {
     position: fixed;
-    width: 350px;
+    width: 25%;
     height: 100vh;
     top: 0;
     left: 0;
@@ -27,7 +27,7 @@
 }
 .menu {
     position: fixed;
-    width: calc(350px - 100px);
+    width: calc(25% - 100px);
     height: auto;
     top: 40%;
     left: 0;
@@ -72,6 +72,18 @@
         .active {
             padding-left: 25px;
         }
+    }
+    h3:nth-of-type(2) {
+        margin-top: 50px;
+    }
+    select {
+        background: transparent;
+        border: none;
+        width: 50%;
+        text-transform: uppercase;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
     }
 }
 .display_bar {
@@ -139,7 +151,7 @@
             background: var(--black);
         }
         h3 {
-            font-size: 18px;
+            font-size: 22px;
             font-weight: 500;
             color: var(--dark-grey);
             span {

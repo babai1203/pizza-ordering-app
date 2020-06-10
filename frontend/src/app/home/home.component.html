@@ -10,6 +10,11 @@
             <div *ngIf="hover_tab == i"></div>
         </li>
     </ol>
+    <h3>CURRENCY</h3>
+    <select [(ngModel)]="currency">
+        <option value="dollar">USD ($)</option>
+        <option value="euro">EUR (€)</option>
+    </select>
 </div>
 <div class="display_bar">
     <div style="display: contents;text-align: right;" (click)="go_to_orders()">
