@@ -12,7 +12,7 @@
     </ol>
 </div>
 <div class="display_bar">
-    <div style="display: contents;text-align: right;">
+    <div style="display: contents;text-align: right;" (click)="go_to_orders()">
         <img class="cart" src="assets/food.png">
         <span class="content">ORDER STATUS</span>
         <div class="number">
@@ -25,7 +25,21 @@
     <div class="wid_100">
         <div class="wid_33" *ngFor="let item of filtered_items; let i = index;">
             <img *ngIf="menu[active_tab] == 'Pizza'" src="assets/pizza.png">
-            <img *ngIf="menu[active_tab] == 'Dessert'" src="assets/desserts.png">
+            <img *ngIf="menu[active_tab] == 'Desserts'" src="assets/desserts.png">
+            <div class="add_btn" *ngIf="get_quantity(item._id) == 0" (click)="add(item)">
+                +
+            </div>
+            <div class="count_container" *ngIf="get_quantity(item._id) > 0">
+                <div class="sub_btn_2" (click)="sub_quantity(item._id)">
+                    -
+                </div>
+                <div class="quantity">
+                    {{get_quantity(item._id)}}
+                </div>
+                <div class="add_btn_2" (click)="add_quantity(item._id)">
+                    +
+                </div>
+            </div>
             <h3>
                 <span *ngIf="currency == 'dollar'">$</span>
                 <span *ngIf="currency == 'euro'">€</span>
@@ -40,3 +54,4 @@
         </div>
     </div>
 </div>
+<router-outlet></router-outlet>

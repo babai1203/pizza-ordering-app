@@ -15,15 +15,17 @@ export class GlobalService {
   cart: any;
   currency: string;
   currency_sub: BehaviorSubject<any>;
+  cart_sub: BehaviorSubject<any>;
   constructor(
     private http: HttpClient
   ) {
     this.menu = {};
     this.url = environment.url;
-    this.cart = {"user":"","items":[],"sub_total":0,"discount":0,"delivery_charge":0,"total_amount":0,"address":""};
+    this.cart = {"type":"cart","user":"","items":[],"sub_total":0,"discount":0,"delivery_charge":0,"total_amount":0,"address":""};
     this.order = {};
     this.order_no = window.sessionStorage.order_no ? window.sessionStorage.order_no : '';
     this.currency_sub = new BehaviorSubject<any>('euro');
+    this.cart_sub = new BehaviorSubject<any>(this.cart);
   }
   get_menu() {
     if(Object.keys(this.menu).length == 0) {
@@ -48,18 +50,16 @@ export class GlobalService {
   }
   async get_order() {
     if(Object.keys(this.order).length > 0) {
-      return this.order;
+      this.set_cart(this.order);
     } else if(this.order_no) {
-      await this.http.get(this.url + 'orders/' + this.order_no).subscribe((response)=>{
+      this.http.get(this.url + 'orders/' + this.order_no).subscribe((response)=>{
         this.order = response;
         window.sessionStorage.order = JSON.stringify(response);
-        return this.order;
+        this.set_cart(this.order);
       },function(err){
         console.log(err);
         alert('Technical Error. Please try again.');
       });
-    } else {
-      return this.cart;
     }
   }
   get_currency(): Observable<string> {
@@ -67,5 +67,11 @@ export class GlobalService {
   }
   set_currency(str): void {
     this.currency_sub.next(str);
+  }
+  get_cart(): Observable<string> {
+    return this.cart_sub.asObservable();
+  }
+  set_cart(obj): void {
+    this.cart_sub.next(obj);
   }
 }
