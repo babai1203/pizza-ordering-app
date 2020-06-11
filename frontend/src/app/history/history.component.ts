@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { GlobalService } from '../global.service';
 import { Location } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-history',
@@ -13,10 +10,8 @@ import { environment } from '../../environments/environment';
 export class HistoryComponent implements OnInit {
   orders: any;
   constructor(
-    private router: Router,
     private global: GlobalService,
-    private location: Location,
-    private http: HttpClient
+    private location: Location
   ) {
     this.orders = [];
     global.get_order_history();

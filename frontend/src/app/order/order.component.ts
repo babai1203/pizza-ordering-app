@@ -16,6 +16,7 @@ export class OrderComponent implements OnInit {
   menu: any;
   url: string;
   error: Boolean;
+  user: any;
   constructor(
     private router: Router,
     private global: GlobalService,
@@ -25,6 +26,7 @@ export class OrderComponent implements OnInit {
     this.error = false;
     this.url = environment.url;
     this.menu = global.get_menu();
+    global.get_user_details();
   }
 
   ngOnInit(): void {
@@ -33,6 +35,9 @@ export class OrderComponent implements OnInit {
     });
     this.global.get_cart().subscribe((obj)=>{
       this.order = obj;
+    });
+    this.global.get_user().subscribe((obj)=>{
+      this.user = obj;
     });
   }
 
@@ -98,7 +103,8 @@ export class OrderComponent implements OnInit {
   }
 
   place_order() {
-    if(this.order.name == '' || this.order.address == '') return this.error = true;
+    if(this.user.id) this.order.user = this.user.id;
+    if(this.order.user == '' || this.order.address == '') return this.error = true;
     this.error = false;
     this.http.post(this.url + 'orders', this.order).subscribe((response: any)=>{
       this.global.set_cart({"type":"cart","user":"","currency":"euro","items":[],"sub_total":0,"discount":0,"delivery_charge":0,"total_amount":0,"address":""});

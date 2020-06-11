@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -10,12 +10,14 @@ export class GlobalService {
   menu: any;
   url: string;
   orders: any;
-  user: string;
+  user: any;
   cart: any;
   currency: string;
   currency_sub: BehaviorSubject<any>;
   cart_sub: BehaviorSubject<any>;
   order_sub: BehaviorSubject<any>;
+  user_sub: BehaviorSubject<any>;
+  token: any;
   constructor(
     private http: HttpClient
   ) {
@@ -26,6 +28,8 @@ export class GlobalService {
     this.currency_sub = new BehaviorSubject<any>('euro');
     this.cart_sub = new BehaviorSubject<any>(this.cart);
     this.order_sub = new BehaviorSubject<any>(this.orders);
+    this.user = window.sessionStorage.user ? JSON.parse(window.sessionStorage.user) : {};
+    this.user_sub = new BehaviorSubject<any>(this.user);
   }
   get_menu() {
     if(Object.keys(this.menu).length == 0) {
@@ -43,6 +47,11 @@ export class GlobalService {
       });
     } else {
       return this.menu;
+    }
+  }
+  get_user_details() {
+    if(Object.keys(this.user).length > 0) {
+      this.set_user(this.user);
     }
   }
   async get_cart_status() {
@@ -71,15 +80,41 @@ export class GlobalService {
     this.order_sub.next(arr);
     window.sessionStorage.orders = JSON.stringify(arr);
   }
-  async add_order_history(order_no) {
-    let response;
-    try {
-      response = await this.http.get(this.url + 'orders/' + order_no).toPromise();
-      this.orders.unshift(response);
-      window.sessionStorage.orders = JSON.stringify(this.orders);
-    } catch(e) {
-      console.log(e);
-      alert('Technical Error. Please try again.');
+  get_user(): Observable<string> {
+    return this.user_sub.asObservable();
+  }
+  set_user(obj): void {
+    this.user = obj;
+    window.sessionStorage.user = JSON.stringify(obj);
+    window.sessionStorage.removeItem('orders');
+    this.add_order_history('abc');
+    this.user_sub.next(obj);
+  }
+  async add_order_history(str) {
+    if(this.user.id) {
+      let headers = new HttpHeaders();
+      headers = headers.set('token', this.user.token);
+      let response;
+      try {
+        response = await this.http.get(this.url + 'orders/history', { headers: headers }).toPromise();
+        this.orders = response.reverse();
+        window.sessionStorage.orders = JSON.stringify(this.orders);
+        this.set_orders(this.orders);
+      } catch(e) {
+        console.log(e);
+        alert('Technical Error. Please try again.');
+      }
+    } else {
+      let response;
+      try {
+        response = await this.http.get(this.url + 'orders/' + str).toPromise();
+        this.orders.unshift(response);
+        window.sessionStorage.orders = JSON.stringify(this.orders);
+        this.set_orders(this.orders);
+      } catch(e) {
+        console.log(e);
+        alert('Technical Error. Please try again.');
+      }
     }
   }
 }

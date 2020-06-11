@@ -1,1 +1,33 @@
-<p>account works!</p>
+<div class="overlay" (click)="back()">
+    <div class="order_container" (click)="stop($event)">
+        <div class="header">
+            <h2>
+                User Account
+                <span (click)="back()">
+                    HIDE <img src="assets/next.png">
+                </span>
+            </h2>
+        </div>
+        <div *ngIf="is_login" class="centered">
+            <h3>Login Details</h3>
+            <input type="email" placeholder="Enter E-mail ID" [(ngModel)]="email">
+            <input type="password" placeholder="Enter Password" [(ngModel)]="password">
+            <p class="secondary">Not registered yet? <a (click)="alter()">Register Now</a></p>
+            <p class="error" *ngIf="error">*E-mail ID and Password is mandatory.</p>
+            <div style="text-align: center;margin: 25px;" (click)="login()">
+                <button>LOGIN</button>
+            </div>
+        </div>
+        <div *ngIf="!is_login" class="centered">
+            <h3>Registration Details</h3>
+            <input type="text" placeholder="Enter Full Name" [(ngModel)]="name">
+            <input type="email" placeholder="Enter E-mail ID" [(ngModel)]="email">
+            <input type="password" placeholder="Enter Password" [(ngModel)]="password">
+            <p class="secondary">Already a member? <a (click)="alter()">Login Now</a></p>
+            <p class="error" *ngIf="error">*Name, E-mail ID and Password is mandatory.</p>
+            <div style="text-align: center;margin: 25px;" (click)="register()">
+                <button>REGISTER</button>
+            </div>
+        </div>
+    </div>
+</div>

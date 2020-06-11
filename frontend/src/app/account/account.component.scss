@@ -1,0 +1,61 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 5;
+    background: rgba(0,0,0,0.2);
+}
+.order_container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 500px;
+    height: calc(100vh - 50px);
+    overflow: scroll;
+    background: var(--white);
+    z-index: 6;
+    padding: 25px;
+}
+.header {
+    h2 {
+        font-size: 24px;
+        font-weight: 600;
+    }
+    span {
+        float: right;
+        font-size: 18px;
+        font-weight: 500;
+        cursor: pointer;
+        img {
+            width: 30px;
+            vertical-align: bottom;
+        }
+    }
+}
+.centered {
+    position: fixed;
+    top: 40%;
+    transform: translateY(-40%);
+    right: 25px;
+    width: 500px;
+}
+.secondary {
+    text-align: right;
+    a {
+        color: var(--dark-yellow);
+        font-weight: 600;
+        cursor: pointer;
+    }
+}
+h3 {
+    color: var(--dark-yellow);
+    font-weight: 600;
+    margin: 25px 0;
+}
+.error {
+    color: var(--red);
+    font-size: 12px;
+    font-weight: 600;
+}

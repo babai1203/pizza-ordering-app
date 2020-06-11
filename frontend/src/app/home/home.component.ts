@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   filtered_items: any;
   currency: string;
   orders: any;
+  user: any;
   constructor(
     private router: Router,
     private global: GlobalService
@@ -27,6 +28,7 @@ export class HomeComponent implements OnInit {
     this.filtered_items = this.items[this.menu[this.active_tab]];
     global.get_order_history();
     global.get_cart_status();
+    global.get_user_details();
   }
 
   ngOnInit(): void {
@@ -35,10 +37,12 @@ export class HomeComponent implements OnInit {
     });
     this.global.get_cart().subscribe((obj)=>{
       this.order = obj;
-      console.log(this.order);
     });
     this.global.get_orders().subscribe((arr)=>{
       this.orders = arr;
+    });
+    this.global.get_user().subscribe((obj)=>{
+      this.user = obj;
     });
   }
 
@@ -133,6 +137,17 @@ export class HomeComponent implements OnInit {
     this.order.discount = parseFloat(this.order.discount.toFixed(2));
     this.order.total_amount = parseFloat(this.order.total_amount.toFixed(2));
     this.global.set_cart(this.order);
+  }
+
+  go_to_login() {
+    this.router.navigate(['/menu/user']);
+  }
+
+  logout() {
+    window.sessionStorage.removeItem('token');
+    window.sessionStorage.removeItem('user');
+    window.sessionStorage.removeItem('orders');
+    location.reload();
   }
 
 }
