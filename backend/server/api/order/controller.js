@@ -34,7 +34,7 @@ export async function get_order_details (req, res) {
 export async function get_order_history (req, res) {
     try {
         let orders = await Order.find({ user: req.user._id }).populate('items.item','title');
-        let user = await user.findOne({ _id: req.user._id }, { name: 1 });
+        let user = await User.findOne({ _id: req.user._id }, { name: 1 });
         orders.forEach((a)=>{
             a.user = user.name;
         });
