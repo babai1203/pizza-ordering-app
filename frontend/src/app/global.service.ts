@@ -21,7 +21,7 @@ export class GlobalService {
   ) {
     this.menu = {};
     this.url = environment.url;
-    this.cart = window.sessionStorage.cart ? JSON.parse(window.sessionStorage.cart) : {"type":"cart","user":"","items":[],"sub_total":0,"discount":0,"delivery_charge":0,"total_amount":0,"address":""};
+    this.cart = window.sessionStorage.cart ? JSON.parse(window.sessionStorage.cart) : {"type":"cart","user":"","currency":"euro","items":[],"sub_total":0,"discount":0,"delivery_charge":0,"total_amount":0,"address":""};
     this.order = {};
     this.order_no = window.sessionStorage.order_no ? window.sessionStorage.order_no : '';
     this.currency_sub = new BehaviorSubject<any>('euro');

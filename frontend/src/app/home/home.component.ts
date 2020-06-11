@@ -30,10 +30,23 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.global.get_currency().subscribe((str)=>{
       this.currency = str;
+      this.currency_change();
     });
     this.global.get_cart().subscribe((obj)=>{
       this.order = obj;
     });
+  }
+
+  currency_change() {
+    this.order.items.forEach((a)=>{
+      this.items['Pizza'].forEach((d)=>{
+        if(d._id == a.item) a.price = d.price[this.currency];
+      });
+      this.items['Desserts'].forEach((d)=>{
+        if(d._id == a.item) a.price = d.price[this.currency];
+      });
+    });
+    this.calculate();
   }
 
   highlight(num) {
@@ -66,13 +79,10 @@ export class HomeComponent implements OnInit {
       this.order.items.push({
         item: item._id,
         quantity: 1,
-        price: {
-          currency: this.currency,
-          value: item.price[this.currency]
-        }
+        price: item.price[this.currency]
       });
     }
-    this.global.set_cart(this.order);
+    this.calculate();
   }
 
   sub_quantity(id) {
@@ -82,7 +92,7 @@ export class HomeComponent implements OnInit {
         else a.quantity--;
       }
     });
-    this.global.set_cart(this.order);
+    this.calculate();
   }
 
   add_quantity(id) {
@@ -91,11 +101,27 @@ export class HomeComponent implements OnInit {
         a.quantity++;
       }
     });
-    this.global.set_cart(this.order);
+    this.calculate();
   }
 
   go_to_orders() {
     this.router.navigate(['/menu/order']);
+  }
+
+  calculate() {
+    this.order.sub_total = 0;
+    this.order.discount = 0;
+    this.order.delivery_charge = 10.00;
+    this.order.total_amount = 0;
+    this.order.items.forEach((a)=>{
+      this.order.sub_total += a.price * a.quantity;
+    });
+    this.order.discount = this.order.sub_total * (10/100);
+    this.order.total_amount = this.order.sub_total + this.order.delivery_charge - this.order.discount;
+    this.order.sub_total = parseFloat(this.order.sub_total.toFixed(2));
+    this.order.discount = parseFloat(this.order.discount.toFixed(2));
+    this.order.total_amount = parseFloat(this.order.total_amount.toFixed(2));
+    this.global.set_cart(this.order);
   }
 
 }

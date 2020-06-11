@@ -11,7 +11,7 @@
         </li>
     </ol>
     <h3>CURRENCY</h3>
-    <select [(ngModel)]="currency">
+    <select [(ngModel)]="currency" (change)="currency_change()">
         <option value="dollar">USD ($)</option>
         <option value="euro">EUR (€)</option>
     </select>

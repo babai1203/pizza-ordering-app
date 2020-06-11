@@ -16,8 +16,7 @@ export class OrderComponent implements OnInit {
     private global: GlobalService,
     private location: Location
   ) {
-    this.order = global.get_order();
-    console.log(this.order);
+    global.get_order();
   }
 
   ngOnInit(): void {
@@ -26,6 +25,7 @@ export class OrderComponent implements OnInit {
     });
     this.global.get_cart().subscribe((obj)=>{
       this.order = obj;
+      console.log(this.order);
     });
   }
 
