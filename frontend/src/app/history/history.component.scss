@@ -43,74 +43,17 @@
     }
 }
 .container {
+    padding-bottom: 25px;
+    border-bottom: 1px solid var(--light-grey);
     h3 {
         margin: 50px 0 25px 0;
         color: var(--dark-yellow);
         font-weight: 600;
     }
-    ol {
-        list-style: none;
-        li {
-            padding: 15px 0;
-            text-transform: uppercase;
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-        .wid_100 {
-            width: 100%;
-            display: flex;
-        }
-        .wid_50 {
-            width: 50%;
-            float: left;
-            font-size: 16px;
-            font-weight: 500;
-            span {
-                color: var(--dark-grey);
-            }
-        }
-        .count_container {
-            width: fit-content;
-            box-shadow: 5px 5px 5px 0 rgba(0,0,0,0.1);
-            cursor: pointer;
-            background: var(--white);
-            height: 40px;
-            border-radius: 40px;
-            text-align: center;
-            float: right;
-            div {
-                display: inline-block;
-            }
-        }
-        .sub_btn_2 {
-            width: 40px;
-            height: 40px;
-            background: var(--red);
-            color: var(--white);
-            font-size: 26px;
-            border-top-left-radius: 40px;
-            border-bottom-left-radius: 40px;
-        }
-        .add_btn_2 {
-            width: 40px;
-            height: 40px;
-            background: var(--red);
-            color: var(--white);
-            font-size: 26px;
-            border-top-right-radius: 40px;
-            border-bottom-right-radius: 40px;
-        }
-        .quantity {
-            // width: 25px;
-            font-size: 24px;
-            margin: 0 20px;
-            color: var(--dark-grey);
-        }
-    }
     .list {
         width: 100%;
         display: flex;
+        margin-bottom: 5px;
         .wid_50 {
             width: 50%;
             float: left;
@@ -119,7 +62,7 @@
             color: var(--dark-grey);
             span {
                 color: var(--black);
-                font-size: 20px;
+                font-size: 16px;
                 font-weight: 600;
                 float: right;
                 text-align: right;
@@ -139,4 +82,7 @@
             margin-bottom: 10px;
         }
     }
+}
+.container:nth-last-of-type(1) {
+    border: none;
 }

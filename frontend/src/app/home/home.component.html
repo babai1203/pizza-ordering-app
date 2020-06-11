@@ -17,9 +17,16 @@
     </select>
 </div>
 <div class="display_bar">
-    <div style="display: contents;text-align: right;" (click)="go_to_orders()">
+    <div style="display: inline-block;text-align: right;margin-right: 25px;cursor: pointer;" (click)="go_to_orders()">
+        <img class="cart" src="assets/history.png">
+        <span class="content">ORDER HISTORY</span>
+        <div class="number">
+            <span>{{orders.length}}</span>
+        </div>
+    </div>
+    <div style="display: inline-block;text-align: right;cursor: pointer;" (click)="go_to_cart()">
         <img class="cart" src="assets/food.png">
-        <span class="content">ORDER STATUS</span>
+        <span class="content">CART PREVIEW</span>
         <div class="number">
             <span>{{order.items.length}}</span>
         </div>

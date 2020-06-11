@@ -1,0 +1,95 @@
+<div class="overlay" (click)="back()">
+    <div class="order_container" (click)="stop($event)">
+        <div class="header">
+            <h2>
+                Order History
+                <span (click)="back()">
+                    HIDE <img src="assets/next.png">
+                </span>
+            </h2>
+        </div>
+        <p class="no_data" *ngIf="orders.length == 0">No order history.</p>
+        <div class="container" *ngFor="let item of orders">
+            <h3>{{item.order_no}}</h3>
+            <div class="list">
+                <div class="wid_50">
+                    Items Ordered
+                </div>
+                <div class="wid_50">
+                    <span *ngFor="let food of item.items">
+                        {{food.item.title}} - Qty.{{food.quantity}}
+                        <br>
+                    </span>
+                </div>
+            </div>
+            <div class="list">
+                <div class="wid_50">
+                    Deliver to
+                </div>
+                <div class="wid_50">
+                    <span>
+                        {{item.user}}
+                    </span>
+                </div>
+            </div>
+            <div class="list">
+                <div class="wid_50">
+                    Delivery at
+                </div>
+                <div class="wid_50">
+                    <span>
+                        {{item.address}}
+                    </span>
+                </div>
+            </div>
+            <div class="list">
+                <div class="wid_50">
+                    Sub Total
+                </div>
+                <div class="wid_50">
+                    <span *ngIf="item.currency == 'dollar'">$</span>
+                    <span *ngIf="item.currency == 'euro'">€</span>
+                    <span>
+                        {{item.sub_total.toFixed(2)}}
+                    </span>
+                </div>
+            </div>
+            <div class="list">
+                <div class="wid_50">
+                    Discount (-10%)
+                </div>
+                <div class="wid_50">
+                    <span *ngIf="item.currency == 'dollar'">$</span>
+                    <span *ngIf="item.currency == 'euro'">€</span>
+                    <span>
+                        - {{item.discount.toFixed(2)}}
+                    </span>
+                </div>
+            </div>
+            <div class="list">
+                <div class="wid_50">
+                    Delivery Charges
+                </div>
+                <div class="wid_50">
+                    <span *ngIf="item.currency == 'dollar'">$</span>
+                    <span *ngIf="item.currency == 'euro'">€</span>
+                    <span>
+                        {{item.delivery_charge.toFixed(2)}}
+                    </span>
+                </div>
+            </div>
+            <div class="list">
+                <div class="wid_50">
+                    Total Amount
+                </div>
+                <div class="wid_50">
+                    <span *ngIf="item.currency == 'dollar'">$</span>
+                    <span *ngIf="item.currency == 'euro'">€</span>
+                    <span>
+                        {{item.total_amount.toFixed(2)}}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

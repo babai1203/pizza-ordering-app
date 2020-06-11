@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { HomeComponent } from './home/home.component';
 import { OrderComponent } from './order/order.component';
+import { HistoryComponent } from './history/history.component';
 
 const routes: Routes = [
   {
@@ -14,8 +15,12 @@ const routes: Routes = [
     component: HomeComponent,
     children:  [
       {
-        path: 'order',
+        path: 'cart',
         component: OrderComponent
+      },
+      {
+        path: 'history',
+        component: HistoryComponent
       }
     ]
   },

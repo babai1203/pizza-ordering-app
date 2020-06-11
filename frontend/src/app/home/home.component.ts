@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   order: any;
   filtered_items: any;
   currency: string;
+  orders: any;
   constructor(
     private router: Router,
     private global: GlobalService
@@ -24,16 +25,20 @@ export class HomeComponent implements OnInit {
     this.active_tab = 0;
     this.hover_tab = -1;
     this.filtered_items = this.items[this.menu[this.active_tab]];
-    global.get_order();
+    global.get_order_history();
+    global.get_cart_status();
   }
 
   ngOnInit(): void {
     this.global.get_currency().subscribe((str)=>{
       this.currency = str;
-      this.currency_change();
     });
     this.global.get_cart().subscribe((obj)=>{
       this.order = obj;
+      console.log(this.order);
+    });
+    this.global.get_orders().subscribe((arr)=>{
+      this.orders = arr;
     });
   }
 
@@ -46,6 +51,8 @@ export class HomeComponent implements OnInit {
         if(d._id == a.item) a.price = d.price[this.currency];
       });
     });
+    this.order.currency = this.currency;
+    this.global.set_currency(this.currency);
     this.calculate();
   }
 
@@ -105,7 +112,11 @@ export class HomeComponent implements OnInit {
   }
 
   go_to_orders() {
-    this.router.navigate(['/menu/order']);
+    this.router.navigate(['/menu/history']);
+  }
+
+  go_to_cart() {
+    this.router.navigate(['/menu/cart']);
   }
 
   calculate() {

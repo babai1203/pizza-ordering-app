@@ -1,5 +1,101 @@
 <div class="overlay" (click)="back()">
     <div class="order_container" (click)="stop($event)">
-
+        <div class="header">
+            <h2>
+                Cart Preview
+                <span (click)="back()">
+                    HIDE <img src="assets/next.png">
+                </span>
+            </h2>
+        </div>
+        <p class="no_data" *ngIf="order.items.length == 0">No items in your cart.</p>
+        <div class="container" *ngIf="order.items.length > 0">
+            <h3>ITEMS</h3>
+            <ol>
+                <li *ngFor="let item of order.items; let i = index;">
+                    <div class="wid_100">
+                        <div class="wid_50">
+                            {{get_name(item.item)}}
+                            <br>
+                            <span *ngIf="currency == 'dollar'">$</span>
+                            <span *ngIf="currency == 'euro'">€</span>
+                            <span>&nbsp;{{item.price.toFixed(2)}}</span>
+                        </div>
+                        <div class="wid_50">
+                            <div class="count_container">
+                                <div class="sub_btn_2" (click)="sub_quantity(i)">
+                                    -
+                                </div>
+                                <div class="quantity">
+                                    {{item.quantity}}
+                                </div>
+                                <div class="add_btn_2" (click)="add_quantity(i)">
+                                    +
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ol>
+            <h3>Billing Details</h3>
+            <div class="list">
+                <div class="wid_50">
+                    Currency
+                </div>
+                <div class="wid_50">
+                    <select [(ngModel)]="currency" (change)="currency_change()">
+                        <option value="dollar">USD ($)</option>
+                        <option value="euro">EUR (€)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="list">
+                <div class="wid_50">
+                    Sub Total
+                </div>
+                <div class="wid_50">
+                    <span *ngIf="currency == 'dollar'">$</span>
+                    <span *ngIf="currency == 'euro'">€</span>
+                    <span>&nbsp;{{order.sub_total.toFixed(2)}}</span>
+                </div>
+            </div>
+            <div class="list">
+                <div class="wid_50">
+                    Discount (-10%)
+                </div>
+                <div class="wid_50">
+                    <span *ngIf="currency == 'dollar'">$</span>
+                    <span *ngIf="currency == 'euro'">€</span>
+                    <span>&nbsp;- {{order.discount.toFixed(2)}}</span>
+                </div>
+            </div>
+            <div class="list">
+                <div class="wid_50">
+                    Delivery Charges
+                </div>
+                <div class="wid_50">
+                    <span *ngIf="currency == 'dollar'">$</span>
+                    <span *ngIf="currency == 'euro'">€</span>
+                    <span>&nbsp;{{order.delivery_charge.toFixed(2)}}</span>
+                </div>
+            </div>
+            <h3>Total Amount Payable</h3>
+            <div class="list">
+                <div class="wid_50">
+                    Grand Total
+                </div>
+                <div class="wid_50">
+                    <span *ngIf="currency == 'dollar'">$</span>
+                    <span *ngIf="currency == 'euro'">€</span>
+                    <span>&nbsp;{{order.total_amount.toFixed(2)}}</span>
+                </div>
+            </div>
+            <h3>Delivery Details</h3>
+            <input type="text" [(ngModel)]="order.user" placeholder="Enter Full Name">
+            <textarea [(ngModel)]="order.address" rows="1" placeholder="Enter Delivery Address"></textarea>
+            <div style="text-align: center;margin: 25px;" (click)="place_order()">
+                <button>PLACE ORDER</button>
+            </div>
+        </div>
     </div>
 </div>

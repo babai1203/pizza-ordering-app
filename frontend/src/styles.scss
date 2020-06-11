@@ -52,3 +52,34 @@ button {
     border-radius: 50px;
     letter-spacing: 2px;
 }
+input {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--black);
+    padding: 15px 0;
+    border: none;
+    border-bottom: 1px solid var(--light-grey);
+    width: 100%;
+    margin-bottom: 15px;
+}
+textarea {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--black);
+    padding: 15px 0;
+    border: none;
+    border-bottom: 1px solid var(--light-grey);
+    width: 100%;
+    margin-bottom: 15px;
+}
+::-webkit-input-placeholder { /* Edge */
+    color: var(--light-grey);
+}
+  
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: var(--light-grey);
+}
+  
+::placeholder {
+    color: var(--light-grey);
+}

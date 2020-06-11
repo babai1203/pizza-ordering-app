@@ -104,7 +104,6 @@
         width: 30px;
         vertical-align: middle;
         margin-right: 10px;
-        cursor: pointer;
     }
     .number {
         background: var(--red);
@@ -116,14 +115,12 @@
         display: inline-block;
         text-align: center;
         padding-bottom: 10px;
-        cursor: pointer;
     }
     div > span {
         color: var(--white);
     }
     .content {
         font-weight: 600;
-        cursor: pointer;
         color: var(--black) !important;
     }
     h1 {

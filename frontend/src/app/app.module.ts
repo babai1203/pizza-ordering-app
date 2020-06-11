@@ -9,13 +9,15 @@ import { FormsModule } from '@angular/forms';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { HomeComponent } from './home/home.component';
 import { OrderComponent } from './order/order.component';
+import { HistoryComponent } from './history/history.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingPageComponent,
     HomeComponent,
-    OrderComponent
+    OrderComponent,
+    HistoryComponent
   ],
   imports: [
     BrowserModule,
