@@ -33,7 +33,7 @@ export class GlobalService {
         this.menu = JSON.parse(window.sessionStorage.menu);
         return this.menu;
       }
-      this.http.get(this.url + 'menus').subscribe((response)=>{
+      this.http.get(this.url + 'menus').subscribe((response: any)=>{
         this.menu = response;
         window.sessionStorage.menu = JSON.stringify(response);
         return this.menu;
@@ -75,7 +75,7 @@ export class GlobalService {
     let response;
     try {
       response = await this.http.get(this.url + 'orders/' + order_no).toPromise();
-      this.orders.push(response);
+      this.orders.unshift(response);
       window.sessionStorage.orders = JSON.stringify(this.orders);
     } catch(e) {
       console.log(e);

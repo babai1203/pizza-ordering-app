@@ -15,12 +15,14 @@ export class OrderComponent implements OnInit {
   order: any;
   menu: any;
   url: string;
+  error: Boolean;
   constructor(
     private router: Router,
     private global: GlobalService,
     private location: Location,
     private http: HttpClient
   ) {
+    this.error = false;
     this.url = environment.url;
     this.menu = global.get_menu();
   }
@@ -96,7 +98,8 @@ export class OrderComponent implements OnInit {
   }
 
   place_order() {
-    if(this.order.name == '' || this.order.address == '') return alert('Please fill Full Name and Delivery Address');
+    if(this.order.name == '' || this.order.address == '') return this.error = true;
+    this.error = false;
     this.http.post(this.url + 'orders', this.order).subscribe((response: any)=>{
       this.global.set_cart({"type":"cart","user":"","currency":"euro","items":[],"sub_total":0,"discount":0,"delivery_charge":0,"total_amount":0,"address":""});
       this.global.add_order_history(response.order_no);
