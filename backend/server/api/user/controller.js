@@ -15,7 +15,7 @@ export async function create_new_user (req, res) {
         req.body.password = hashPassword;
         let user = await User.create(req.body);
         const token = jwt.sign({ _id: user._id }, config.getConstants().token.secret, { expiresIn: '30d' });
-        return res.status(200).json({ token: token, name: user.name });
+        return res.status(200).json({ token: token, name: user.name, id: user._id });
     } catch(e) {
         console.log(e);
         return res.status(400).json({ message: 'New user creation failed.' });
