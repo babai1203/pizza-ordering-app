@@ -13,6 +13,10 @@ var OrderSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
+    'currency': {
+        type: String,
+        enum: ['dollar','euro']
+    },
     'items': [{
         'item': {
             type: Schema.ObjectId,
@@ -22,12 +26,7 @@ var OrderSchema = new mongoose.Schema({
             type: Number
         },
         'price': {
-            'currency': {
-                type: String
-            },
-            'value': {
-                type: Number
-            }
+            type: Number
         }
     }],
     'sub_total': {
