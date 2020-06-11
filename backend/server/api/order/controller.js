@@ -33,6 +33,9 @@ export async function get_order_details (req, res) {
 export async function get_order_history (req, res) {
     try {
         let orders = await Order.find({ user: req.user._id }).populate('items.item','title');
+        orders.forEach((a)=>{
+            a.user = req.user.name;
+        });
         return res.status(200).json(orders);
     } catch(e) {
         console.log(e);
