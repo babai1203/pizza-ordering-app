@@ -10,6 +10,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { HomeComponent } from './home/home.component';
 import { OrderComponent } from './order/order.component';
 import { HistoryComponent } from './history/history.component';
+import { AccountComponent } from './account/account.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { HistoryComponent } from './history/history.component';
     LandingPageComponent,
     HomeComponent,
     OrderComponent,
-    HistoryComponent
+    HistoryComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,
