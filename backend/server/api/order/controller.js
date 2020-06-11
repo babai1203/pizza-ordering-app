@@ -1,5 +1,6 @@
 import Order from './model';
 import Global from '../global/model';
+import User from '../user/model';
 
 export async function place_order (req, res) {
     try {
@@ -33,8 +34,9 @@ export async function get_order_details (req, res) {
 export async function get_order_history (req, res) {
     try {
         let orders = await Order.find({ user: req.user._id }).populate('items.item','title');
+        let user = await user.findOne({ _id: req.user._id }, { name: 1 });
         orders.forEach((a)=>{
-            a.user = req.user.name;
+            a.user = user.name;
         });
         return res.status(200).json(orders);
     } catch(e) {
